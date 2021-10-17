@@ -5,13 +5,63 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="styles.css" media="”screen”" />
-    <title>Web3 Wanderer QR</title>
-  </head>
-  <body>
     <script
       src="https://cdn.ethers.io/scripts/ethers-v3.min.js"
       charset="utf-8"
       type="text/javascript"
     ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/web3@0.19.0/dist/web3.js"
+    ></script>
+
+    <title>Web3 Wanderer QR</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>You Found It!</h1>
+      </header>
+      <main>
+        <p>You are about to join an exclusive membership of explorers</p>
+        <img src="" alt="Badge Preview" />
+        <button id="wallet-connect">Claim you Badge</button>
+        <p id="demo"></p>
+        <p id="output"></p>
+      </main>
+      <footer>
+        <p>Web3 Wanderer</p>
+        <p>Don't have a web3 wallet? Get set up <a href="#">here!</a></p>
+      </footer>
+    </div>
+
+    <script>
+      var x = document.getElementById("demo");
+      if (typeof window.ethereum !== "undefined") {
+        console.log("MetaMask is installed!");
+      }
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+          x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+      }
+
+      function showPosition(position) {
+        x.innerHTML =
+          "Latitude: " +
+          position.coords.latitude +
+          "<br>Longitude: " +
+          position.coords.longitude;
+      }
+
+      const ethereumButton = document.querySelector("#wallet-connect");
+
+      ethereumButton.addEventListener("click", () => {
+        //Will Start the metamask extension
+        ethereum.request({ method: "eth_requestAccounts" });
+      });
+    </script>
   </body>
 </html>
