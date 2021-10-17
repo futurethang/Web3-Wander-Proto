@@ -25,6 +25,7 @@
       <main>
         <p>You are about to join an exclusive membership of explorers</p>
         <img src="" alt="Badge Preview" />
+        <button id="get-location">My Location</button>
         <button id="wallet-connect">Claim you Badge</button>
         <p id="demo"></p>
         <p id="output"></p>
@@ -37,9 +38,13 @@
 
     <script>
       var x = document.getElementById("demo");
+      const ethereumButton = document.querySelector("#wallet-connect");
+      const locationButton = document.querySelector("#get-location");
+
       if (typeof window.ethereum !== "undefined") {
         console.log("MetaMask is installed!");
       }
+
       function getLocation() {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(showPosition);
@@ -56,11 +61,13 @@
           position.coords.longitude;
       }
 
-      const ethereumButton = document.querySelector("#wallet-connect");
-
       ethereumButton.addEventListener("click", () => {
         //Will Start the metamask extension
         ethereum.request({ method: "eth_requestAccounts" });
+      });
+
+      locationButton.addEventListener("click", () => {
+        getLocation();
       });
     </script>
   </body>
